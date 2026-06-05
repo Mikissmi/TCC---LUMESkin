@@ -1,0 +1,22 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block conteudo %}
+    <h2>Crie sua Conta no LUME Skin</h2>
+    <p>Comece sua jornada para uma pele mais saudável.</p>
+    
+    <form method="POST">
+        {% csrf_token %} <div style="margin-bottom: 15px;">
+            <label>Nome Completo:</label><br>
+            <input type="text" name="nome" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>E-mail:</label><br>
+            <input type="email" name="email" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Senha:</label><br>
+            <input type="password" name="senha" required style="width: 100%; padding: 8px;">
+        </div>
+        <button type="submit" class="btn">Cadastrar e Iniciar</button>
+    </form>
+{% endblock %}

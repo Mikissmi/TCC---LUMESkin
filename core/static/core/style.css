@@ -1,0 +1,202 @@
+/* Variáveis de Cores (Baseado no seu design) */
+:root {
+    --primary-orange: #d292eb;
+    --primary-light: #fff0e6;
+    --bg-color: #f8f9fa;
+    --text-dark: #1a1a1a;
+    --text-muted: #666;
+    --white: #ffffff;
+    --border-color: #e5e5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ================= LOGIN ================= */
+.login-body {
+    background-color: var(--primary-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 900px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.login-left {
+    padding: 50px;
+    flex: 1;
+    background: #fafafa;
+}
+
+.login-left h1 {
+    font-size: 2.5rem;
+    margin: 20px 0;
+}
+
+.highlight {
+    color: var(--primary-orange);
+}
+
+.login-right {
+    padding: 50px;
+    flex: 1;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary-orange);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logo-icon {
+    background: var(--primary-orange);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* ================= APP LAYOUT ================= */
+.app-body {
+    display: flex;
+    background-color: var(--bg-color);
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--white);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.menu-item.active, .menu-item:hover {
+    background: var(--primary-light);
+    color: var(--primary-orange);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Dashboard Cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+}
+
+.card-health {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 8px solid var(--primary-orange);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.health-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.badge-green {
+    background: #e6f4ea;
+    color: #1e8e3e;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.alert-box {
+    background: #fce8e6;
+    color: #c5221f;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 14px;
+}

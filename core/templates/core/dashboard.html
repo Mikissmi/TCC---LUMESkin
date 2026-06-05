@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="dashboard-header">
+    <p>Aqui está o resumo da sua pele hoje.</p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card card-health">
+        <div class="score-circle">
+            <h2>78%</h2>
+            <span>Score Atual</span>
+        </div>
+        <div class="health-info">
+            <h3>Saúde da Pele <span class="badge-green">+3% essa semana</span></h3>
+            <p>Sua hidratação melhorou significativamente nos últimos 7 dias.</p>
+            <div class="health-stats">
+                <div>
+                    <span class="label">Meta (8 semanas)</span>
+                    <strong>85%</strong>
+                </div>
+                <div>
+                    <span class="label">Dias Consecutivos</span>
+                    <strong class="highlight-text">🔥 12 dias</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-uv">
+        <h4>📍 São Paulo, SP</h4>
+        <h1 class="uv-danger">8.5 <small>MUITO ALTO</small></h1>
+        <p>Índice UV Atual</p>
+        <div class="alert-box">
+            ⚠️ <strong>Alerta de Exposição:</strong> Reforce o FPS 50+ agora.
+        </div>
+    </div>
+</div>
+{% endblock %}

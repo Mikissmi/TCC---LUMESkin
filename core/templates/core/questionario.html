@@ -1,0 +1,27 @@
+{% extends 'core/index.html' %}
+
+{% block conteudo %}
+    <h2>Questionário Dermatológico</h2>
+    <p>Responda com sinceridade para personalizarmos sua rotina.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <h3>1. Como sua pele reage ao sol?</h3>
+        <input type="radio" name="reacao_sol" value="0" id="r1"> <label for="r1">Sempre queima, nunca bronzeia</label><br>
+        <input type="radio" name="reacao_sol" value="1" id="r2"> <label for="r2">Sempre queima, bronzeia muito pouco</label><br>
+        <input type="radio" name="reacao_sol" value="2" id="r3"> <label for="r3">Queima moderadamente, bronzeia gradualmente</label><br>
+        <input type="radio" name="reacao_sol" value="3" id="r4"> <label for="r4">Raramente queima, bronzeia com facilidade</label><br>
+        
+        <h3>2. Qual o seu tipo de pele predominante?</h3>
+        <select name="tipo_pele" style="width: 100%; padding: 8px;">
+            <option value="oleosa">Oleosa (Brilho excessivo e poros abertos)</option>
+            <option value="seca">Seca (Descama ou repuxa)</option>
+            <option value="mista">Mista (Oleosa na zona T, seca nas bochechas)</option>
+            <option value="normal">Normal (Equilibrada)</option>
+        </select>
+
+        <br><br>
+        <button type="submit" class="btn">Salvar Perfil e Ver Resultados</button>
+    </form>
+{% endblock %}
