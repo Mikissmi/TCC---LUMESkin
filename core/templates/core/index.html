@@ -11,15 +11,15 @@
 <body class="app-body">
     <aside class="sidebar">
         <div class="logo">
-            <div class="logo-icon">L</div>
+            <div class="logo-icon">𖥸</div>
             <h2>LUME Skin</h2>
         </div>
         <nav class="menu">
-            <a href="{% url 'dashboard' %}" class="menu-item active">🏠 Dashboard (Home)</a>
-            <a href="#" class="menu-item">📷 Scanner de Pele por IA</a>
+            <a href="{% url 'dashboard' %}" class="menu-item active">Dashboard (Home)</a>
+            <a href="#" class="menu-item">Scanner de Pele por IA</a>
            
-            <a href="#" class="menu-item">✨ Recomendações</a>
-            <a href="#" class="menu-item">👩‍⚕️ Especialistas</a>
+            <a href="#" class="menu-item">Recomendações</a>
+            <a href="#" class="menu-item">Especialistas</a>
         </nav>
         <div class="sidebar-footer">
            
@@ -30,7 +30,7 @@
         <header class="topbar">
             <div class="user-profile">
                 <span class="bell-icon">🔔</span>
-                <img src="https://i.pravatar.cc/150?img=5" alt="Usuário" class="avatar">
+                <span class="user-name">{{ request.user.first_name|default:'Usuário' }}</span>
             </div>
         </header>
         

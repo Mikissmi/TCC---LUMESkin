@@ -1,39 +1,120 @@
-{% extends 'core/base.html' %}
+{% extends 'core/index.html' %}
 
 {% block content %}
-<div class="dashboard-header">
-    <p>Aqui está o resumo da sua pele hoje.</p>
-</div>
+    {% if perfil %}
+    <div class="dashboard-header">
+        <h3>Aqui está o resumo da sua pele, {{ perfil.usuario.first_name|default:'usuário' }}.</h3>
+    </div>
 
-<div class="dashboard-grid">
-    <div class="card card-health">
-        <div class="score-circle">
-            <h2>78%</h2>
-            <span>Score Atual</span>
-        </div>
-        <div class="health-info">
-            <h3>Saúde da Pele <span class="badge-green">+3% essa semana</span></h3>
-            <p>Sua hidratação melhorou significativamente nos últimos 7 dias.</p>
-            <div class="health-stats">
-                <div>
-                    <span class="label">Meta (8 semanas)</span>
-                    <strong>85%</strong>
-                </div>
-                <div>
-                    <span class="label">Dias Consecutivos</span>
-                    <strong class="highlight-text">🔥 12 dias</strong>
+    <div class="dashboard-grid">
+        <div class="card card-health">
+            <div class="score-circle">
+                <h2>{{ perfil.porcentagem_saude }}%</h2>
+                <span>Score Atual</span>
+            </div>
+            <div class="health-info">
+                <h3>Saúde da Pele <span class="badge-green">{{ perfil.tipo_pele|capfirst }}</span></h3>
+                <p>Idade: {{ perfil.idade }} anos · Objetivo: {{ perfil.objetivo|default:'Melhorar a pele' }}.</p>
+                <div class="health-stats">
+                    <div>
+                        <span class="label">Preferência</span>
+                        <strong>{{ perfil.prefere_creme_ou_gel|capfirst }}</strong>
+                    </div>
+                    <div>
+                        <span class="label">Usa maquiagem</span>
+                        <strong>{{ perfil.usa_maquiagem_diariamente|yesno:'Sim,Não' }}</strong>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="card card-uv">
-        <h4>📍 São Paulo, SP</h4>
-        <h1 class="uv-danger">8.5 <small>MUITO ALTO</small></h1>
-        <p>Índice UV Atual</p>
-        <div class="alert-box">
-            ⚠️ <strong>Alerta de Exposição:</strong> Reforce o FPS 50+ agora.
+        <div class="card card-uv">
+            <h2>Perfil dermatológico</h2>
+            <h3 class="uv-danger">{{ perfil.fototipo }} <small>TIPO</small></h3>
+            <p>Tipo de pele registrado: {{ perfil.tipo_pele|capfirst }}.</p>
         </div>
     </div>
-</div>
+
+    <div class="dashboard-grid">
+        <div class="card card-today-status">
+            <div class="status-header">
+                <h3>Status de Hoje</h3>
+                <div class="toggle-switch">
+                    <button class="switch-btn active" data-mode="manha">Manhã</button>
+                    <button class="switch-btn" data-mode="noite">Noite</button>
+                </div>
+            </div>
+
+            <div class="routine-list" id="routine-list">
+                {% for item in rotina_manha %}
+                <div class="routine-item {{ item.class }}">
+                    <div class="status-check">
+                        {% if item.icon %}
+                        <i class="fa-solid {{ item.icon }}"></i>
+                        {% endif %}
+                    </div>
+                    <div class="routine-details">
+                        <strong>{{ item.title }}</strong>
+                        <span>{{ item.description }}</span>
+                    </div>
+                    {% if item.action %}
+                    <div class="routine-action">{{ item.action }}</div>
+                    {% else %}
+                    <div class="routine-time">{{ item.time }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            {{ rotina_manha|json_script:"rotina-manha-data" }}
+            {{ rotina_noite|json_script:"rotina-noite-data" }}
+        </div>
+        <script>
+            (function() {
+                const rotinaManha = JSON.parse(document.getElementById('rotina-manha-data').textContent);
+                const rotinaNoite = JSON.parse(document.getElementById('rotina-noite-data').textContent);
+                const routineList = document.getElementById('routine-list');
+                const buttons = document.querySelectorAll('.toggle-switch .switch-btn');
+
+                function renderRoutine(items) {
+                    routineList.innerHTML = items.map(item => {
+                        const iconHtml = item.icon ? `<i class="fa-solid ${item.icon}"></i>` : '';
+                        const actionHtml = item.action
+                            ? `<div class="routine-action">${item.action}</div>`
+                            : `<div class="routine-time">${item.time || ''}</div>`;
+                        return `
+                            <div class="routine-item ${item.class}">
+                                <div class="status-check">${iconHtml}</div>
+                                <div class="routine-details">
+                                    <strong>${item.title}</strong>
+                                    <span>${item.description}</span>
+                                </div>
+                                ${actionHtml}
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        buttons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        renderRoutine(button.dataset.mode === 'noite' ? rotinaNoite : rotinaManha);
+                    });
+                });
+            })();
+        </script>
+
+        <div class="card card-uv">
+            <h2>Níveis de UV</h2>
+            <h3 class="uv-danger">{{ perfil.fototipo }} <small>TIPO</small></h3>
+            <p>Tipo de pele registrado: {{ perfil.tipo_pele|capfirst }}.</p>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="dashboard-header">
+        <p>Nenhum perfil encontrado. Complete o questionário para ver o seu dashboard.</p>
+    </div>
+    {% endif %}
 {% endblock %}

@@ -1,27 +1,88 @@
-{% extends 'core/index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário | LUME Skin</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}?v=2">
+</head>
+<body class="app-body">
+    <main class="main-content">
+        <div class="questionnaire-page">
+            <h2>Questionário Dermatológico</h2>
+            <p>Responda com sinceridade para personalizarmos sua rotina.</p>
+            
+            <form method="POST" action="{% url 'questionario' %}" class="questionnaire-form">
+                {% csrf_token %}
 
-{% block conteudo %}
-    <h2>Questionário Dermatológico</h2>
-    <p>Responda com sinceridade para personalizarmos sua rotina.</p>
-    
-    <form method="POST">
-        {% csrf_token %}
-        
-        <h3>1. Como sua pele reage ao sol?</h3>
-        <input type="radio" name="reacao_sol" value="0" id="r1"> <label for="r1">Sempre queima, nunca bronzeia</label><br>
-        <input type="radio" name="reacao_sol" value="1" id="r2"> <label for="r2">Sempre queima, bronzeia muito pouco</label><br>
-        <input type="radio" name="reacao_sol" value="2" id="r3"> <label for="r3">Queima moderadamente, bronzeia gradualmente</label><br>
-        <input type="radio" name="reacao_sol" value="3" id="r4"> <label for="r4">Raramente queima, bronzeia com facilidade</label><br>
-        
-        <h3>2. Qual o seu tipo de pele predominante?</h3>
-        <select name="tipo_pele" style="width: 100%; padding: 8px;">
-            <option value="oleosa">Oleosa (Brilho excessivo e poros abertos)</option>
-            <option value="seca">Seca (Descama ou repuxa)</option>
-            <option value="mista">Mista (Oleosa na zona T, seca nas bochechas)</option>
-            <option value="normal">Normal (Equilibrada)</option>
-        </select>
+                <div class="form-block">
+                    <label>0. Qual a sua idade?</label>
+                    <input type="number" name="idade" min="10" max="120" required>
+                </div>
 
-        <br><br>
-        <button type="submit" class="btn">Salvar Perfil e Ver Resultados</button>
-    </form>
-{% endblock %}
+                <div class="form-block">
+                    <label>1. Qual é o seu principal objetivo com o skincare?</label>
+                    <input type="text" name="objetivo" placeholder="Ex: Hidratar, controlar oleosidade, reduzir manchas" required>
+                </div>
+
+                <div class="form-block">
+                    <label>2. Qual o seu tipo de pele predominante?</label>
+                    <select name="tipo_pele" required>
+                        <option value="oleosa">Oleosa (Brilho excessivo e poros abertos)</option>
+                        <option value="seca">Seca (Descama ou repuxa)</option>
+                        <option value="mista">Mista (Oleosa na zona T, seca nas bochechas)</option>
+                        <option value="normal">Normal (Equilibrada)</option>
+                    </select>
+                </div>
+
+                <div class="form-block">
+                    <label>Diagnosticado por um dermatologista ou uma análise pessoal?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="diagnostico" value="0"> Diagnosticado por um dermatologista</label>
+                        <label><input type="radio" name="diagnostico" value="1"> Análise pessoal</label>
+                    </div>
+                </div>
+
+                <div class="form-block">
+                    <label>3. Você tem histórico de alergias na pele?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="alergias" value="0"> Não, nunca tive</label>
+                        <label><input type="radio" name="alergias" value="1"> Sim</label>
+                    </div>
+                    <input type="text" name="descricaoalergia" placeholder="Descreva as alergias...">
+                </div>
+
+                <div class="form-block">
+                    <label>4. Você utiliza maquiagem diariamente?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="maquiagem" value="0"> Não</label>
+                        <label><input type="radio" name="maquiagem" value="1"> Sim</label>
+                    </div>
+                </div>
+
+                <div class="form-block">
+                    <label>5. Como sua pele reage ao sol?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="reacao_sol" value="0"> Sempre queima, nunca bronzeia</label>
+                        <label><input type="radio" name="reacao_sol" value="1"> Sempre queima, bronzeia muito pouco</label>
+                        <label><input type="radio" name="reacao_sol" value="2"> Queima moderadamente, bronzeia gradualmente</label>
+                        <label><input type="radio" name="reacao_sol" value="3"> Raramente queima, bronzeia com facilidade</label>
+                    </div>
+                </div>
+
+                <div class="form-block">
+                    <label>6. Você prefere produtos à base de gel ou creme?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="base_produto" value="gel"> Gel</label>
+                        <label><input type="radio" name="base_produto" value="creme"> Creme</label>
+                        <label><input type="radio" name="base_produto" value="gel"> Gel-creme</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Salvar Perfil e Ver Resultados</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

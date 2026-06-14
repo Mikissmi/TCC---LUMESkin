@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - LUME Skin</title>
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}?v=2">
 </head>
 <body class="login-body">
     <div class="login-container">
@@ -24,12 +24,13 @@
                 <h2>Bem-vindo de volta</h2>
                 <p class="subtitle">Acesse sua conta para continuar sua jornada.</p>
                 
-                <form action="{% url 'dashboard' %}">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
                     <label>E-mail</label>
-                    <input type="email" placeholder="seu@email.com">
+                    <input type="email" name="email" placeholder="seu@email.com" required>
                     
                     <label>Senha <a href="#" class="forgot">Esqueceu a senha?</a></label>
-                    <input type="password" placeholder="••••••••">
+                    <input type="password" name="senha" placeholder="••••••••" required>
                     
                     <button type="submit" class="btn-primary">Entrar →</button>
                 </form>
@@ -38,6 +39,7 @@
                 
                 <button class="btn-social">Continuar com Google</button>
                 <button class="btn-social">Continuar com Apple</button>
+                <p class="alternate">Ainda não tem conta? <a href="{% url 'cadastro_view' %}">Cadastre-se aqui</a></p>
             </div>
         </div>
     </div>

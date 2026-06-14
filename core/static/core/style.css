@@ -1,202 +1,928 @@
-/* Variáveis de Cores (Baseado no seu design) */
-:root {
-    --primary-orange: #d292eb;
-    --primary-light: #fff0e6;
-    --bg-color: #f8f9fa;
-    --text-dark: #1a1a1a;
-    --text-muted: #666;
-    --white: #ffffff;
-    --border-color: #e5e5e5;
-}
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* 1. Reset Global Completo */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* ================= LOGIN ================= */
-.login-body {
-    background-color: var(--primary-light);
+/* Ajuste do Body usando a classe que está no seu HTML */
+body.app-body {
+    background: radial-gradient(circle at top right, rgba(164, 111, 210, 0.466), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(13, 124, 179, 0.418), transparent 50%);
+    background-color: #fcfcfc;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 20px;
 }
 
-.login-container {
+/* 2. Container Principal (Força as duas colunas lado a lado) */
+.skin-container {
     display: flex;
-    width: 900px;
-    background: var(--white);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    overflow: hidden;
-}
-
-.login-left {
-    padding: 50px;
-    flex: 1;
-    background: #fafafa;
-}
-
-.login-left h1 {
-    font-size: 2.5rem;
-    margin: 20px 0;
-}
-
-.highlight {
-    color: var(--primary-orange);
-}
-
-.login-right {
-    padding: 50px;
-    flex: 1;
-}
-
-.login-box input {
+    max-width: 1140px;
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    gap: 80px;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-primary {
-    width: 100%;
-    background: var(--primary-orange);
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
+/* 3. Lado Esquerdo - Branding */
+.brand-section {
+    flex: 1;
+    max-width: 500px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
 }
 
 .logo-icon {
-    background: var(--primary-orange);
+    background-color: #a46fd2;
     color: white;
-    padding: 5px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    display: inline-block;
-}
-
-/* ================= APP LAYOUT ================= */
-.app-body {
-    display: flex;
-    background-color: var(--bg-color);
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 260px;
-    background: var(--white);
-    border-right: 1px solid var(--border-color);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.logo {
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.logo-text {
+    font-weight: 700;
+    color: #0b132a;
+    font-size: 18px;
+}
+
+.main-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0b132a;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.main-title .highlight {
+    color: #a46fd2;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 15px;
+    line-height: 1.6;
     margin-bottom: 40px;
 }
 
-.menu {
+/* Grid de Features (Cards inferiores) */
+.features-grid {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+}
+
+.feature-card {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     flex: 1;
 }
 
-.menu-item {
-    text-decoration: none;
-    color: var(--text-muted);
+.feature-icon.orange-bg {
+    background-color: #fff4ed;
+    color: #a46fd2;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.feature-text strong {
+    display: block;
+    font-size: 13px;
+    color: #0b132a;
+    margin-bottom: 4px;
+}
+
+.feature-text p {
+    font-size: 11px;
+    color: #8a92a6;
+    line-height: 1.4;
+}
+
+/* 4. Lado Direito - Sessão de Autenticação */
+.auth-section {
+    flex: 1;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-card {
+    background: white;
+    width: 100%;
+    padding: 36px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* Abas Alternadoras */
+.tabs-container {
+    background-color: #f3f4f6;
+    padding: 4px;
+    border-radius: 12px;
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.tab-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+    border-radius: 9px;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #0b132a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 22px;
+    color: #0b132a;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    font-size: 13px;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* Inputs do Formulário */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 14px 14px 14px 42px;
+    border: 1px solid #edf2f7;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-wrapper input:focus {
+    border-color: #c813ff;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(255, 106, 19, 0.1);
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    color: #a0aec0;
+    font-size: 15px;
+}
+
+/* Botão Laranja Principal */
+.btn-primary {
+    width: 100%;
+    background-color: #a46fd2;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #8a5fc0;
+}
+
+/* Divisor "OU" */
+.divider {
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #edf2f7;
+    z-index: 1;
+}
+
+.divider span {
+    background: white;
+    padding: 0 12px;
+    font-size: 11px;
+    color: #a0aec0;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+/* Botões de Redes Sociais */
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.btn-social {
+    width: 100%;
+    background: white;
+    border: 1px solid #edf2f7;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-social:hover {
+    background-color: #f8fafc;
+}
+
+.btn-social i {
+    font-size: 16px;
+    color: #000;
+}
+
+/* Link Convidado */
+.guest-login {
+    text-align: center;
+}
+
+.guest-login a {
+    font-size: 13px;
+    color: #718096;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Termos de Uso inferiores */
+.terms-text {
+    font-size: 11px;
+    color: #a0aec0;
+    text-align: center;
+    margin-top: 24px;
+    line-height: 1.5;
+    max-width: 340px;
+}
+
+.terms-text a {
+    color: #9513ff;
+    text-decoration: none;
+}
+
+/* Helpers para alternância de formulários (login / registro) */
+.hide { display: none !important; }
+.form-switch form { width: 100%; }
+.form-switch .form-title { margin-top: 0; }
+
+/* 5. Responsividade Completa (Para telas menores) */
+@media (max-width: 900px) {
+    .skin-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px 10px;
+    }
+    .brand-section {
+        text-align: center;
+        max-width: 100%;
+    }
+    .logo-area {
+        justify-content: center;
+    }
+    .features-grid {
+        flex-direction: column;
+    }
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Ajuste do Body usando a classe que está no seu HTML */
+body.app-body {
+    background: radial-gradient(circle at top right, rgba(164, 111, 210, 0.466), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(13, 124, 179, 0.418), transparent 50%);
+    background-color: #fcfcfc;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.main-content {
+    width: 100%;
+    max-width: 720px; /* Largura centralizada e confortável baseada no modelo */
+}
+
+/* ==========================================================================
+   2. CABEÇALHO DA PÁGINA
+   ========================================================================== */
+.questionnaire-page h2 {
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    color: #0b132a;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.questionnaire-page > p {
+    font-size: 15px;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+/* ==========================================================================
+   3. BLOCOS DE PERGUNTAS (ESTILO CARD DO MODELO)
+   ========================================================================== */
+.questionnaire-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-block {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-block:hover {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
+}
+
+/* Títulos das perguntas */
+.form-block label:first-child {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0b132a;
+    margin-bottom: 18px;
+}
+
+/* ==========================================================================
+   4. INPUTS, SELECTS E TEXTAREAS
+   ========================================================================== */
+.form-block input[type="text"],
+.form-block input[type="number"],
+.form-block select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #edf2f7;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-block input[type="text"]::placeholder,
+.form-block input[type="number"]::placeholder {
+    color: #607796;
+}
+
+.form-block input[type="text"]:focus,
+.form-block input[type="number"]:focus,
+.form-block select:focus {
+    border-color: #a46fd2;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(164, 111, 210, 0.1);
+}
+
+/* Campo condicional (descrição da alergia) se ajustando abaixo dos radios */
+.form-block input[name="descricaoalergia"] {
+    margin-top: 16px;
+}
+
+/* ==========================================================================
+   5. GRUPOS DE SELEÇÃO (RADIO BUTTONS)
+   ========================================================================== */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Customização sutil das linhas de múltipla escolha */
+.radio-group label {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #4a5568 !important;
+    cursor: pointer;
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #edf2f7;
+    margin-bottom: 0 !important;
+    transition: all 0.2s ease;
+}
+
+.radio-group label:hover {
+    background: #f8edff;
+    border-color: rgba(164, 111, 210, 0.3);
+    color: #a46fd2 !important;
+}
+
+/* Estilização nativa do input radio para combinar com a marca */
+.radio-group input[type="radio"] {
+    accent-color: #a46fd2;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   6. BOTÃO DE ENVIO (MANTENDO A IDENTIDADE)
+   ========================================================================== */
+.btn {
+    width: 100%;
+    background-color: #a46fd2;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(164, 111, 210, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background-color: #a46fd2;
+}
+
+.btn:active {
+    transform: scale(0.99);
+}
+
+/* Adiciona a setinha dinâmica via pseudo-elemento simulando o ícone do modelo */
+.btn::after {
+    content: " →";
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   7. RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 600px) {
+    body.app-body {
+        padding: 30px 16px;
+    }
+    
+    .questionnaire-page h2 {
+        font-size: 26px;
+    }
+    
+    .form-block {
+        padding: 20px;
+    }
+}
+
+/* ==========================================================================
+   4. ESTILOS DA TELA DE DASHBOARD (.dashboard-grid)
+   ========================================================================== */
+
+/* Ajuste específico para a área de conteúdo do dashboard */
+body.app-body:has(.dashboard-grid) {
+    background-color: #f4f7f6; /* Tom off-white cinza azulado muito leve da imagem */
+    display: block;
+    padding: 40px;
+}
+
+body.app-body .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho do Dashboard */
+.dashboard-header {
+    margin-bottom: 24px;
+}
+
+.dashboard-header p {
+    font-size: 14px;
+    color: #718096;
     font-weight: 500;
 }
 
-.menu-item.active, .menu-item:hover {
-    background: var(--primary-light);
-    color: var(--primary-orange);
-}
-
-/* Main Content */
-.main-content {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
-}
-
-.topbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-/* Dashboard Cards */
+/* Criando o Grid de duas colunas (Esquerda Larga, Direita Estreita) */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 24px;
+    align-items: start;
 }
 
+/* Estilo Base de todos os Cards */
 .card {
-    background: var(--white);
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    border: 1px solid var(--border-color);
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
+    border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
+/* CARD ESQUERDO: Saúde da Pele */
 .card-health {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
 }
 
+/* Círculo de Score Simulado por Gradiente Conico */
 .score-circle {
-    width: 120px;
-    height: 120px;
+    min-width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 8px solid var(--primary-orange);
+    background: conic-gradient(#ff6a13 var(--score-fill, 78%), #edf2f7 0);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 0 16px #ffffff; /* Cria o efeito vazado do círculo */
 }
 
+/* Ajuste interno dos textos do círculo */
+.score-circle h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0b132a;
+    line-height: 1;
+    z-index: 2;
+}
+
+.score-circle span {
+    font-size: 11px;
+    color: #a0aec0;
+    font-weight: 600;
+    margin-top: 4px;
+    z-index: 2;
+}
+
+/* Informações do lado direito do círculo */
+.health-info {
+    flex: 1;
+}
+
+.health-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0b132a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+/* Badge Verde de porcentagem/tipo */
+.badge-green {
+    background-color: #e6f9f0;
+    color: #10b981;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.health-info p {
+    font-size: 14px;
+    color: #718096;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+/* Mini Grid interno com os metadados */
 .health-stats {
     display: flex;
-    gap: 30px;
-    margin-top: 15px;
+    gap: 40px;
+    border-top: 1px solid #edf2f7;
+    padding-top: 20px;
 }
 
-.badge-green {
-    background: #e6f4ea;
-    color: #1e8e3e;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+.health-stats .label {
+    display: block;
+    font-size: 11px;
+    color: #a0aec0;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
 }
 
+.health-stats strong {
+    font-size: 15px;
+    color: #0b132a;
+    font-weight: 700;
+}
+
+
+/* CARD DIREITO: Fototipo e Alertas (UV) */
+.card-uv {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-uv h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.card-uv h1.uv-danger {
+    font-size: 48px;
+    font-weight: 800;
+    color: #ff6a13; /* Mantendo a cor principal ativa */
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.card-uv h1.uv-danger small {
+    font-size: 13px;
+    color: #a0aec0;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.card-uv p {
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 20px;
+}
+
+/* Caixa de Alerta Inferior Interna (Estilo o Alerta de Exposição) */
 .alert-box {
-    background: #fce8e6;
-    color: #c5221f;
-    padding: 10px;
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 12px;
+    color: #c53030;
+    line-height: 1.5;
+}
+
+.alert-box strong {
+    color: #9b2c2c;
+}
+
+/* ==========================================================================
+   5. RESPONSIVIDADE DO DASHBOARD
+   ========================================================================== */
+@media (max-width: 900px) {
+    body.app-body:has(.dashboard-grid) {
+        padding: 20px;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Vira uma coluna no celular */
+    }
+
+    .card-health {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .health-stats {
+        justify-content: center;
+        gap: 24px;
+    }
+}
+
+/* ==========================================================================
+   WIDGET: Status de Hoje
+   ========================================================================== */
+.card-today-status {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: #ffffff;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b132a;
+}
+
+/* Seletor Manhã / Noite */
+.toggle-switch {
+    background-color: #f3f4f6;
+    padding: 3px;
+    border-radius: 10px;
+    display: flex;
+    gap: 2px;
+}
+
+.switch-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a0aec0;
+    cursor: pointer;
     border-radius: 8px;
-    margin-top: 15px;
+    transition: all 0.2s ease;
+}
+
+.switch-btn.active {
+    background: #ffffff;
+    color: #0b132a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Lista de Rotinas */
+.routine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.routine-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 16px;
+    border: 1px solid #edf2f7;
+    background-color: #ffffff;
+    transition: background-color 0.2s ease;
+}
+
+.routine-details {
+    flex: 1;
+    margin-left: 16px;
+}
+
+.routine-details strong {
+    display: block;
     font-size: 14px;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.routine-details span {
+    font-size: 12px;
+    color: #718096;
+}
+
+/* Checkboxes customizados */
+.status-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: all 0.2s ease;
+}
+
+/* Customização baseada no estado de cada item */
+/* 1. Item Concluído (Verde) */
+.routine-item.completed {
+    background-color: #f7fafc; /* Levemente opaco */
+}
+.routine-item.completed .status-check {
+    background-color: #e6f9f0;
+    border-color: #10b981;
+    color: #10b981;
+}
+.routine-item.completed .routine-details strong {
+    text-decoration: line-through;
+    color: #a0aec0;
+}
+.routine-time {
+    font-size: 13px;
+    color: #a0aec0;
+    font-weight: 500;
+}
+
+/* 2. Item Fazer Agora (Laranja) */
+.routine-item.action-required {
+    background-color: #fffaf7;
+    border-color: #ffeadd;
+}
+.routine-item.action-required .status-check {
+    border-color: #ff6a13;
+    background-color: #ffffff;
+}
+.routine-action {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff6a13;
+    cursor: pointer;
+}
+
+/* 3. Item Pendente (Borda Padrão) */
+.routine-item.pending .status-check {
+    border-color: #cbd5e0;
 }

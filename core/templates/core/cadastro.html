@@ -1,22 +1,139 @@
-{% extends 'core/index.html' %}
+
 {% load static %}
-{% block conteudo %}
-    <h2>Crie sua Conta no LUME Skin</h2>
-    <p>Comece sua jornada para uma pele mais saudável.</p>
-    
-    <form method="POST">
-        {% csrf_token %} <div style="margin-bottom: 15px;">
-            <label>Nome Completo:</label><br>
-            <input type="text" name="nome" required style="width: 100%; padding: 8px;">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar | LUME Skin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}?v=2">
+</head>
+<body class="app-body">
+
+<div class="skin-container">
+    <div class="brand-section">
+        <div class="logo-area">
+            <span class="logo-icon"><i class="fa-solid fa-face-smile-wink"></i></span>
+            <span class="logo-text">LUME Skin</span>
         </div>
-        <div style="margin-bottom: 15px;">
-            <label>E-mail:</label><br>
-            <input type="email" name="email" required style="width: 100%; padding: 8px;">
+        
+        <h1 class="main-title">Sua jornada para uma <span class="highlight">pele perfeita</span> começa aqui.</h1>
+        <p class="subtitle">Análise inteligente por IA, recomendações personalizadas e monitoramento contínuo para o seu skincare ideal.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon orange-bg"><i class="fa-solid fa-expand"></i></div>
+                <div class="feature-text">
+                    <strong>Scanner de IA</strong>
+                    <p>Análise facial com pontuação de saúde</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon orange-bg"><i class="fa-solid fa-bullseye"></i></div>
+                <div class="feature-text">
+                    <strong>Metas Personalizadas</strong>
+                    <p>Cronograma de cuidados e índice UV em tempo real</p>
+                </div>
+            </div>
         </div>
-        <div style="margin-bottom: 15px;">
-            <label>Senha:</label><br>
-            <input type="password" name="senha" required style="width: 100%; padding: 8px;">
-        </div>
-        <button type="submit" class="btn">Cadastrar e Iniciar</button>
-    </form>
-{% endblock %}
+    </div>
+
+    <div class="auth-section">
+        <div class="auth-card">
+            <div class="tabs-container">
+                <button class="tab-btn" data-target="login-form">Login</button>
+                <button class="tab-btn active" data-target="register-form">Criar Conta</button>
+            </div>
+
+            <div class="form-switch">
+                <!-- Login embutido (inicialmente escondido) -->
+                <form method="POST" action="{% url 'login' %}" class="login-form hide" id="login-form">
+                    {% csrf_token %}
+                    <h2 class="form-title">Bem-vindo de volta</h2>
+                    <p class="form-subtitle">Acesse sua conta para continuar sua jornada.</p>
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" name="senha" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Entrar →</button>
+                </form>
+
+                <!-- Formulário de Cadastro (padrão visível) -->
+                <form method="POST" action="{% url 'cadastro_view' %}" class="register-form" id="register-form">
+                    {% csrf_token %}
+                    <h2 class="form-title">Crie sua conta</h2>
+                    <p class="form-subtitle">Cadastre-se para começar sua jornada de skincare inteligente.</p>
+                
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope input-icon"></i>
+                        <input type="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <div class="label-row">
+                        <label>Senha</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" name="senha" placeholder="••••••••" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Cadastrar e Iniciar &nbsp; <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+        
+        <p class="terms-text">
+            Ao continuar, você concorda com nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+// Alterna visibilidade entre login e cadastro
+document.addEventListener('DOMContentLoaded', function(){
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+            // ativa botão
+            tabs.forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // mostra formulário alvo
+            const targetId = btn.getAttribute('data-target');
+            if(!targetId) return;
+            const toShow = document.getElementById(targetId);
+            if(!toShow) return;
+
+            document.querySelectorAll('.form-switch form').forEach(f=>{
+                if(f.id === targetId) f.classList.remove('hide'); else f.classList.add('hide');
+            });
+        });
+    });
+});
+</script>
