@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import PerfilDermatologico  # Usando o seu modelo real
+from .models import PerfilDermatologico 
 
 def tela_cadastro(request):
     if request.method == "POST":
         # Pega os dados digitados no formulário HTML
         nome = request.POST.get('nome')
         email = request.POST.get('email')
-        senha = request.POST.get('senha')
+        senha = request.POST.get('senha') 
         
         # Cria o usuário no banco de dados seguro do Django
         novo_usuario = User.objects.create_user(
@@ -20,7 +20,7 @@ def tela_cadastro(request):
         )
         novo_usuario.save()
         
-        # 🌟 MELHORIA: Loga o usuário automaticamente após o cadastro
+        #Loga o usuário automaticamente após o cadastro
         auth_login(request, novo_usuario)
         
         # Após cadastrar e logar, envia o usuário direto para o questionário
@@ -72,7 +72,7 @@ def tela_questionario(request):
             perfil.objetivo = objective or perfil.objetivo
             perfil.prefere_creme_ou_gel = base_produto if base_produto in ('creme', 'gel') else perfil.prefere_creme_ou_gel
 
-            # Valores iniciais padrão para o Dashboard
+            # como iremos calcular a porcentagem de saúde?
             perfil.porcentagem_saude = 75
 
             # Salva tudo no banco de dados
@@ -86,7 +86,7 @@ def tela_sucesso(request):
     return render(request, 'core/sucesso.html')
 
 
-# 🌟 NOVO: View do Dashboard puxando dados do MySQL
+# View do Dashboard puxando dados do MySQL
 def dashboard_view(request):
     # Se o usuário estiver logado, pegamos o perfil dele
     if request.user.is_authenticated:
@@ -159,7 +159,7 @@ def dashboard_view(request):
     return render(request, 'core/dashboard.html', context)
 
 
-# 🌟 BÔNUS: View para a Tela de Login (visto que você já tem o design pronto)
+# View para a Tela de Login
 def tela_login(request):
     if request.method == "POST":
         email = request.POST.get('email')
