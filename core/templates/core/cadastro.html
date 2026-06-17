@@ -46,73 +46,70 @@
                 <button class="tab-btn active" data-target="register-form">Criar Conta</button>
             </div>
 
-            <div class="form-switch">
-                <!-- Login embutido (inicialmente escondido) -->
-                <form method="POST" action="{% url 'login' %}" class="login-form hide" id="login-form">
-                    {% csrf_token %}
-                    <h2 class="form-title">Bem-vindo de volta</h2>
-                    <p class="form-subtitle">Acesse sua conta para continuar sua jornada.</p>
-                    <div class="input-group">
-                        <label>E-mail</label>
-                        <div class="input-wrapper">
-                            <i class="fa-regular fa-envelope input-icon"></i>
-                            <input type="email" name="email" placeholder="seu@email.com" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Senha</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock input-icon"></i>
-                            <input type="password" name="senha" placeholder="••••••••" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary">Entrar →</button>
-                </form>
-
-                <!-- Formulário de Cadastro (padrão visível) -->
-                <form method="POST" action="{% url 'cadastro_view' %}" class="register-form" id="register-form">
-                    {% csrf_token %}
-                    <h2 class="form-title">Crie sua conta</h2>
-                    <p class="form-subtitle">Cadastre-se para começar sua jornada de skincare inteligente.</p>
-                
-                <div class="input-group">
-                    <label>Nome Completo</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text" name="nome" placeholder="Seu nome completo" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label>E-mail</label>
-                    <div class="input-wrapper">
-                        <i class="fa-regular fa-envelope input-icon"></i>
-                        <input type="email" name="email" placeholder="seu@email.com" required>
-                    </div>
-                </div>
-                
-                <div class="input-group">
-                    <div class="label-row">
-                        <label>Senha</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password" name="senha" placeholder="••••••••" required>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-primary">Cadastrar e Iniciar &nbsp; <i class="fa-solid fa-arrow-right"></i></button>
-                </form>
-            </div>
+     <div class="form-switch">
+    <form method="POST" action="{% url 'login' %}" class="login-form hide" id="login-form">
+        {% csrf_token %}
+        <h2 class="form-title">Bem-vindo de volta</h2>
+        <p class="form-subtitle">Acesse sua conta para continuar sua jornada.</p>
         
-        <p class="terms-text">
-            Ao continuar, você concorda com nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
-        </p>
+        <div class="input-group">
+            <label>E-mail</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" name="username" placeholder="seu@email.com" required>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Senha</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">Entrar →</button>
+    </form>
+
+    <form method="POST" action="{% url 'cadastro_view' %}" class="register-form" id="register-form">
+        {% csrf_token %}
+        <h2 class="form-title">Crie sua conta</h2>
+        <p class="form-subtitle">Cadastre-se para começar sua jornada de skincare inteligente.</p>
+    
+        <div class="input-group">
+            <label>Nome Completo</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" name="nome" placeholder="Seu nome completo" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>E-mail</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" name="email" placeholder="seu@email.com" required>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <div class="label-row">
+                <label>Senha</label>
+            </div>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" name="senha" placeholder="••••••••" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn-primary">Cadastrar e Iniciar &nbsp; <i class="fa-solid fa-arrow-right"></i></button>
+    </form> 
+</div>
+        
+            <p class="terms-text">
+                Ao continuar, você concorda com nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
+            </p>
+        </div>
     </div>
 </div>
-
-</body>
-</html>
 
 <script>
 // Alterna visibilidade entre login e cadastro
@@ -137,3 +134,5 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 </script>
+</body>
+</html>

@@ -13,7 +13,9 @@
             <h2>Questionário Dermatológico</h2>
             <p>Responda com sinceridade para personalizarmos sua rotina.</p>
             
-            <form method="POST" action="{% url 'questionario' %}" class="questionnaire-form">
+            <!-- Para que o HTML consiga enviar arquivos (como a foto do rosto do usuário) para o servidor Django através do formulário, você obrigatoriamente precisa adicionar o atributo enctype="multipart/form-data" na tag <form>. -->
+        
+          <form method="POST" action="{% url 'questionario' %}" enctype="multipart/form-data" class="questionnaire-form">
                 {% csrf_token %}
 
                 <div class="form-block">
@@ -80,7 +82,64 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn">Salvar Perfil e Ver Resultados</button>
+                <div class="form-block">
+    <label>7. Deseja realizar um escaneamento facial com IA para um diagnóstico mais preciso? (Opcional)</label>
+    <div class="radio-group" style="margin-bottom: 15px;">
+        <label>
+            <input type="radio" name="quer_escanear" value="sim" id="scan-sim" onclick="toggleUploadField()"> Sim, quero escanear minha pele
+        </label>
+        <label>
+            <input type="radio" name="quer_escanear" value="nao" id="scan-nao" value="nao" checked onclick="toggleUploadField()"> Não, apenas responder o questionário
+        </label>
+    </div>
+
+    <div id="bloco-upload-foto" style="display: none; padding: 10px; border: 1px dashed #ccc; border-radius: 8px; background-color: #f9f9f9;">
+        <label style="font-size: 0.95rem; color: #555;">Envie uma foto clara do seu rosto de frente:</label>
+        <input type="file" name="foto_rosto" accept="image/*" id="input-foto">
+    </div>
+</div>
+
+<button type="submit" class="btn">Salvar Perfil e Ver Resultados</button>
+
+<script> // Função responsável por ocultar ou exibir o campo de envio de arquivo (foto)
+function toggleUploadField() {
+    // Armazena se o botão de rádio "Sim" está selecionado (retorna verdadeiro ou falso)
+    const scanSim = document.getElementById('scan-sim').checked;
+    const blocoUpload = document.getElementById('bloco-upload-foto');
+    const inputFoto = document.getElementById('input-foto');
+
+    if (scanSim) {
+        // Se selecionou "Sim", torna a caixinha de upload visível na tela
+        blocoUpload.style.display = 'block';
+        // Torna o preenchimento e escolha do arquivo de imagem obrigatório
+        inputFoto.required = true; // Torna a foto obrigatória SE ele escolheu sim
+    } else {
+        // Se selecionou "Não", oculta o bloco de upload da visão do usuário
+        blocoUpload.style.display = 'none';
+        // Remove a obrigatoriedade do arquivo para permitir o envio do formulário limpo
+        inputFoto.required = false;
+        // Limpa qualquer arquivo que o usuário tenha selecionado antes de mudar de ideia
+        inputFoto.value = ''; // Limpa o arquivo caso mude de ideia
+    }
+}
+
+// Altera o texto do botão ao enviar para o usuário saber que a IA está processando
+document.querySelector('.questionnaire-form').addEventListener('submit', function(e) {
+    const scanSim = document.getElementById('scan-sim').checked;
+    const botao = document.querySelector('.btn');
+    
+    if (scanSim) {
+        botao.innerText = 'Analisando sua pele com IA... Por favor, aguarde.';
+        // Não desative o botão imediatamente com .disabled = true no Django tradicional 
+        // caso use validações nativas do navegador que possam travar o envio.
+
+        // Altera visualmente o texto do botão para dar feedback de carregamento, 
+        // já que o processamento da YouCam API pode demorar alguns segundos.
+    } else {
+        botao.innerText = 'Salvando perfil...';
+    }
+});
+</script>
             </form>
         </div>
     </main>
